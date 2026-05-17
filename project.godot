@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Legend of the Dark Hero"
-run/main_scene="uid://mr3ai7pnkume"
+run/main_scene="uid://cjnneid5at0hl"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
