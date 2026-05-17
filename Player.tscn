@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://mr3ai7pnkume"]
+
+[ext_resource type="Texture2D" uid="uid://qe6n4df0k76g" path="res://assets/jugador-caminando-atras.png" id="1_1kp85"]
+[ext_resource type="Texture2D" uid="uid://b82rprmd6nno6" path="res://assets/Jugador-idle-frente.png" id="1_f50pn"]
+[ext_resource type="Texture2D" uid="uid://bbpeebb3yhsde" path="res://assets/jugador-caminando-atras-2.png" id="2_qnedo"]
+[ext_resource type="Texture2D" uid="uid://chmoxqa1n1d3b" path="res://assets/jugador-idle-derecha.png" id="3_wyqjk"]
+[ext_resource type="Texture2D" uid="uid://dboaaj0mmlap4" path="res://assets/jugador-caminando-derecha.png" id="4_k85er"]
+[ext_resource type="Texture2D" uid="uid://cvdj3phmavvbu" path="res://assets/jugador-caminando-frente.png" id="5_ebjds"]
+[ext_resource type="Texture2D" uid="uid://cesqryi7ihrf0" path="res://assets/jugador-caminando-frente-2.png" id="6_y1dt5"]
+[ext_resource type="Texture2D" uid="uid://cqy4rl842624u" path="res://assets/jugador-idle-izquierda.png" id="7_au0nh"]
+[ext_resource type="Texture2D" uid="uid://c30h5grwy2njj" path="res://assets/jugador-caminando-izquierda.png" id="8_76bt2"]
+[ext_resource type="Texture2D" uid="uid://br4xdvbh4qm4u" path="res://assets/jugador-idle-atras.png" id="9_sxias"]
+
+[sub_resource type="GDScript" id="GDScript_ij6vw"]
+resource_name = "Movimiento"
+script/source = "extends CharacterBody2D
+
+@export var velocidad: float = 200.0
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+# Guarda la última dirección para saber a qué 'idle' regresar
+var ultima_direccion: Vector2 = Vector2.DOWN 
+
+func _physics_process(_delta: float) -> void:
+	# 1. Obtener la dirección usando tus nuevas acciones WASD
+	var direccion: Vector2 = Input.get_vector(\"mover_izquierda\", \"mover_derecha\", \"mover_arriba\", \"mover_abajo\")
+	
+	# 2. Aplicar movimiento \"en seco\"
+	if direccion != Vector2.ZERO:
+		# Al normalizar evitamos que camine más rápido en diagonal
+		velocity = direccion.normalized() * velocidad
+		ultima_direccion = direccion
+	else:
+		# Freno en seco instantáneo
+		velocity = Vector2.ZERO
+	
+	# Mover al personaje respetando colisiones
+	move_and_slide()
+	
+	# 3. Controlar las animaciones
+	actualizar_animacion(direccion)
+
+func actualizar_animacion(direccion: Vector2) -> void:
+	if direccion != Vector2.ZERO:
+		# Prioriza la dirección horizontal si se mueve en diagonal
+		if abs(direccion.x) > abs(direccion.y):
+			if direccion.x > 0:
+				sprite.play(\"caminar_derecha\")
+			else:
+				sprite.play(\"caminar_izquierda\")
+		else:
+			if direccion.y > 0:
+				sprite.play(\"caminar_frente\")
+			else:
+				sprite.play(\"caminar_atras\")
+	else:
+		# Si está quieto, usamos la última dirección registrada para el Idle
+		if abs(ultima_direccion.x) > abs(ultima_direccion.y):
+			if ultima_direccion.x > 0:
+				sprite.play(\"idle_derecha\")
+			else:
+				sprite.play(\"idle_izquierda\")
+		else:
+			if ultima_direccion.y > 0:
+				sprite.play(\"idle_frente\")
+			else:
+				sprite.play(\"idle_atras\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f50pn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1kp85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qnedo")
+}],
+"loop": true,
+"name": &"caminar_atras",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wyqjk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k85er")
+}],
+"loop": true,
+"name": &"caminar_derecha",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ebjds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y1dt5")
+}],
+"loop": true,
+"name": &"caminar_frente",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_au0nh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_76bt2")
+}],
+"loop": true,
+"name": &"caminar_izquierda",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_sxias")
+}],
+"loop": false,
+"name": &"idle_atras",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wyqjk")
+}],
+"loop": false,
+"name": &"idle_derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f50pn")
+}],
+"loop": false,
+"name": &"idle_frente",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_au0nh")
+}],
+"loop": false,
+"name": &"idle_izquierda",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ij6vw"]
+radius = 20.024984
+
+[node name="Player" type="CharacterBody2D" unique_id=790353006]
+script = SubResource("GDScript_ij6vw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1948936556]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(5.0234375, 5.375)
+sprite_frames = SubResource("SpriteFrames_f50pn")
+animation = &"caminar_izquierda"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=869241112]
+position = Vector2(0, 35)
+shape = SubResource("CircleShape2D_ij6vw")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=984763545]
