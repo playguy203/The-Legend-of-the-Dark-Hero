@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://cjnneid5at0hl"]
 
-[ext_resource type="Script" uid="uid://d1pir2v0rnwtg" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="1_lgngo"]
 [ext_resource type="Texture2D" uid="uid://vwc6uk22fq7q" path="res://assets/Gemini_Generated_Image_m6tiakm6tiakm6ti.png" id="1_t8jxu"]
 [ext_resource type="Script" uid="uid://hk68lyeu12iy" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="2_fw4w5"]
 [ext_resource type="Script" uid="uid://bjbrftk8dc3ed" path="res://addons/gaea/modifiers/2D/modifier_2d.gd" id="5_pij3u"]
 [ext_resource type="Script" uid="uid://k7x7lpidqsab" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_settings.gd" id="6_0oi55"]
 [ext_resource type="Script" uid="uid://dvoesqkoo585h" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_data.gd" id="7_57gmc"]
 [ext_resource type="Script" uid="uid://c25kr4h11lodq" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="8_0crsg"]
+[ext_resource type="Script" uid="uid://bmkoundtveijj" path="res://addons/gaea/renderers/2D/threaded_tilemap_gaea_renderer.gd" id="9_pfhxm"]
 [ext_resource type="Script" uid="uid://b5tglsl6ppx5u" path="res://addons/gaea/others/chunk_loader_2d.gd" id="9_pij3u"]
 [ext_resource type="PackedScene" uid="uid://mr3ai7pnkume" path="res://player.tscn" id="10_pij3u"]
 
@@ -4226,24 +4226,25 @@ metadata/_custom_type_script = "uid://k7x7lpidqsab"
 tile_set = SubResource("TileSet_lwdvv")
 format = 2
 
-[node name="TilemapGaeaRenderer" type="Node" parent="." unique_id=737626274 node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("1_lgngo")
-node_type = 1
-tile_map = NodePath("../TileMap")
-generator = NodePath("../NoiseGenerator")
-metadata/_custom_type_script = "uid://d1pir2v0rnwtg"
-
 [node name="NoiseGenerator" type="Node" parent="." unique_id=1189703717]
 script = ExtResource("2_fw4w5")
 settings = SubResource("Resource_f3apa")
-chunk_size = Vector2i(32, 32)
 metadata/_custom_type_script = "uid://hk68lyeu12iy"
 
 [node name="ChunkLoader2D" type="Node2D" parent="NoiseGenerator" unique_id=712743167 node_paths=PackedStringArray("generator", "actor")]
 script = ExtResource("9_pij3u")
 generator = NodePath("..")
 actor = NodePath("../Player")
+loading_radius = Vector2i(4, 4)
+load_on_ready = false
 metadata/_custom_type_script = "uid://b5tglsl6ppx5u"
 
 [node name="Player" parent="NoiseGenerator" unique_id=790353006 instance=ExtResource("10_pij3u")]
-position = Vector2(579, 325)
+position = Vector2(578, 322)
+
+[node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." unique_id=432087357 node_paths=PackedStringArray("tile_map", "generator")]
+script = ExtResource("9_pfhxm")
+node_type = 1
+tile_map = NodePath("../TileMap")
+generator = NodePath("../NoiseGenerator")
+metadata/_custom_type_script = "uid://bmkoundtveijj"
