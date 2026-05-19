@@ -4146,8 +4146,7 @@ sources/0 = SubResource("TileSetAtlasSource_5g5eo")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j2eq6"]
 noise_type = 0
-seed = -1602257333
-fractal_octaves = 6
+seed = -353499937
 
 [sub_resource type="Resource" id="Resource_0hui5"]
 script = ExtResource("8_0crsg")
@@ -4159,7 +4158,7 @@ resource_name = "tall grass"
 script = ExtResource("7_57gmc")
 title = "tall grass"
 tile = SubResource("Resource_0hui5")
-min = 0.30000000000000004
+min = 0.3999999999999999
 
 [sub_resource type="Resource" id="Resource_wnkqi"]
 script = ExtResource("8_0crsg")
@@ -4172,7 +4171,7 @@ script = ExtResource("7_57gmc")
 title = "grass"
 tile = SubResource("Resource_wnkqi")
 min = -0.09999999999999998
-max = 0.30000000000000004
+max = 0.3999999999999999
 
 [sub_resource type="Resource" id="Resource_83snu"]
 script = ExtResource("8_0crsg")
@@ -4184,7 +4183,7 @@ resource_name = "sand"
 script = ExtResource("7_57gmc")
 title = "sand"
 tile = SubResource("Resource_83snu")
-min = -0.4
+min = -0.19999999999999996
 max = -0.09999999999999998
 
 [sub_resource type="Resource" id="Resource_t4fig"]
@@ -4198,7 +4197,7 @@ script = ExtResource("7_57gmc")
 title = "shallow water"
 tile = SubResource("Resource_t4fig")
 min = -0.5
-max = -0.4
+max = -0.19999999999999996
 
 [sub_resource type="Resource" id="Resource_y1gce"]
 script = ExtResource("8_0crsg")
@@ -4210,7 +4209,7 @@ resource_name = "water"
 script = ExtResource("7_57gmc")
 title = "water"
 tile = SubResource("Resource_y1gce")
-max = -0.5
+max = -0.4
 
 [sub_resource type="Resource" id="Resource_f3apa"]
 resource_name = "Settings"
@@ -4240,7 +4239,7 @@ load_on_ready = false
 metadata/_custom_type_script = "uid://b5tglsl6ppx5u"
 
 [node name="Player" parent="NoiseGenerator" unique_id=790353006 instance=ExtResource("10_pij3u")]
-position = Vector2(578, 322)
+position = Vector2(568, 323)
 
 [node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." unique_id=432087357 node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("9_pfhxm")
