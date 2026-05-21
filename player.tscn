@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://mr3ai7pnkume"]
 
+[ext_resource type="Resource" uid="uid://bf2htv4whlskm" path="res://inventory/playerinv.tres" id="1_ivps1"]
 [ext_resource type="Texture2D" uid="uid://qe6n4df0k76g" path="res://assets/jugador-caminando-atras.png" id="1_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://bbpeebb3yhsde" path="res://assets/jugador-caminando-atras-2.png" id="2_nvl01"]
 [ext_resource type="Texture2D" uid="uid://chmoxqa1n1d3b" path="res://assets/jugador-idle-derecha.png" id="3_ivps1"]
@@ -10,14 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://c30h5grwy2njj" path="res://assets/jugador-caminando-izquierda.png" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://br4xdvbh4qm4u" path="res://assets/jugador-idle-atras.png" id="9_q13i1"]
 [ext_resource type="Texture2D" uid="uid://b82rprmd6nno6" path="res://assets/Jugador-idle-frente.png" id="10_pylmc"]
+[ext_resource type="PackedScene" uid="uid://dekwlcrxcrdio" path="res://inventory/inv_ui.tscn" id="12_urp6f"]
 
 [sub_resource type="GDScript" id="GDScript_ij6vw"]
 resource_name = "Movimiento"
 script/source = "extends CharacterBody2D
 
-@export var velocidad: float = 60.0
+@export var velocidad: float = 70.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+@export var inv: Inv
 
 # Guarda la última dirección para saber a qué 'idle' regresar
 var ultima_direccion: Vector2 = Vector2.DOWN 
@@ -148,20 +152,28 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ij6vw"]
-radius = 11.206635
+radius = 24.175823
 
 [node name="Player" type="CharacterBody2D" unique_id=790353006]
 script = SubResource("GDScript_ij6vw")
+inv = ExtResource("1_ivps1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1948936556]
-scale = Vector2(1.2750001, 1.2750001)
+position = Vector2(-3.3881318e-21, -4.7683716e-07)
+scale = Vector2(2.13, 1.9112499)
 sprite_frames = SubResource("SpriteFrames_f50pn")
 animation = &"idle_frente"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=869241112]
-position = Vector2(3.5527137e-15, 7)
+position = Vector2(5.9604645e-08, 8.000003)
 scale = Vector2(0.455, 0.455)
 shape = SubResource("CircleShape2D_ij6vw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=984763545]
-zoom = Vector2(6.32, 6.32)
+zoom = Vector2(3.29, 3.29)
+
+[node name="Inv_UI" parent="." unique_id=1085530407 instance=ExtResource("12_urp6f")]
+offset_left = -47.0
+offset_top = -79.0
+offset_right = 46.0
+offset_bottom = -14.0

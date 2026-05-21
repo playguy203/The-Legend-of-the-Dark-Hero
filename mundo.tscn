@@ -2132,6 +2132,7 @@ texture = ExtResource("1_t8jxu")
 53:24/0 = 0
 54:24/0 = 0
 55:24/0 = 0
+55:24/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 56:24/0 = 0
 57:24/0 = 0
 58:24/0 = 0
@@ -2141,6 +2142,7 @@ texture = ExtResource("1_t8jxu")
 62:24/0 = 0
 63:24/0 = 0
 64:24/0 = 0
+64:24/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 65:24/0 = 0
 66:24/0 = 0
 67:24/0 = 0
@@ -4142,11 +4144,13 @@ texture = ExtResource("1_t8jxu")
 85:47/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lwdvv"]
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_5g5eo")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j2eq6"]
 noise_type = 0
-seed = -353499937
+seed = -643565605
 
 [sub_resource type="Resource" id="Resource_0hui5"]
 script = ExtResource("8_0crsg")
@@ -4170,7 +4174,7 @@ resource_name = "grass"
 script = ExtResource("7_57gmc")
 title = "grass"
 tile = SubResource("Resource_wnkqi")
-min = -0.09999999999999998
+min = -0.30000000000000004
 max = 0.3999999999999999
 
 [sub_resource type="Resource" id="Resource_83snu"]
@@ -4239,7 +4243,7 @@ load_on_ready = false
 metadata/_custom_type_script = "uid://b5tglsl6ppx5u"
 
 [node name="Player" parent="NoiseGenerator" unique_id=790353006 instance=ExtResource("10_pij3u")]
-position = Vector2(568, 323)
+position = Vector2(579, 328)
 
 [node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." unique_id=432087357 node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("9_pfhxm")
